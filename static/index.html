@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoiceAI Studio | Enterprise Multipurpose Voice Platform</title>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            zinc: {
+              850: '#1f1f23',
+              900: '#18181b',
+              925: '#121215',
+              950: '#09090b',
+            },
+            accent: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar for sleek developer tool look */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* Glass and border utilities */
+    .panel-border { border: 1px solid rgba(255, 255, 255, 0.08); }
+    .panel-bg { background-color: #121215; }
+    .card-bg { background-color: #18181b; }
+    
+    /* Code tag styling */
+    .json-key { color: #818cf8; }
+    .json-str { color: #34d399; }
+    .json-num { color: #fbbf24; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex antialiased font-sans selection:bg-indigo-500/20 selection:text-indigo-200">
+
+  <!-- ================= SIDEBAR NAVIGATION ================= -->
+  <aside class="w-64 bg-zinc-925 border-r border-white/[0.08] flex flex-col justify-between hidden md:flex shrink-0 select-none">
+    <div>
+      <!-- Workspace Switcher -->
+      <div class="p-4 border-b border-white/[0.08]">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-600/20">
+            <i data-lucide="waves" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm text-white tracking-tight truncate">VoiceFlow Studio</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-white/[0.06]">v2.4</span>
+            </div>
+            <div class="flex items-center space-x-1.5 text-[11px] text-zinc-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="truncate">Production / Telephony</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3 space-y-1">
+        <button onclick="switchView('simulator')" id="nav-simulator" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-white bg-zinc-800/90 border border-white/[0.08] transition">
+          <i data-lucide="terminal" class="w-4 h-4 text-indigo-400"></i>
+          <span>Voice Simulator</span>
+        </button>
+        <button onclick="switchView('campaigns')" id="nav-campaigns" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-zinc-850/60 transition">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Campaigns Studio</span>
+        </button>
+        <button onclick="switchView('contacts')" id="nav-contacts" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-zinc-850/60 transition">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>Audience & CRM</span>
+        </button>
+        <button onclick="switchView('analytics')" id="nav-analytics" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-zinc-850/60 transition">
+          <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+          <span>Logs & Analytics</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Infrastructure Telemetry Footer -->
+    <div class="p-3 border-t border-white/[0.08] bg-zinc-950/40 space-y-2">
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 px-2">Engines & Status</div>
+      <div class="space-y-1.5 px-2">
+        <div class="flex items-center justify-between text-[11px]">
+          <span class="text-zinc-400 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Groq LPU (Qwen 3.8)</span>
+          </span>
+          <span class="font-mono text-zinc-400 text-[10px]">&lt;200ms</span>
+        </div>
+        <div class="flex items-center justify-between text-[11px]">
+          <span class="text-zinc-400 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Deepgram Aura TTS</span>
+          </span>
+          <span class="font-mono text-zinc-400 text-[10px]">24kHz WAV</span>
+        </div>
+        <div class="flex items-center justify-between text-[11px]">
+          <span class="text-zinc-400 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+            <span>Est. Cost / Call</span>
+          </span>
+          <span class="font-mono text-emerald-400 text-[10px]">~₹0.74</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- TOP HEADER -->
+    <header class="h-14 border-b border-white/[0.08] bg-zinc-925/80 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+      <div class="flex items-center space-x-3">
+        <!-- Mobile menu toggle -->
+        <button onclick="toggleMobileNav()" class="md:hidden p-1.5 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+        <div class="flex items-center space-x-2 text-xs text-zinc-400 font-medium">
+          <span class="hover:text-zinc-200 transition">Outbound Telephony</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+          <span id="breadcrumbViewTitle" class="text-zinc-100 font-semibold">Live Voice Simulator</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <button onclick="loadRandomContact()" class="text-xs px-2.5 py-1.5 rounded-lg bg-zinc-850 hover:bg-zinc-800 border border-white/[0.08] text-zinc-300 hover:text-white transition flex items-center space-x-1.5">
+          <i data-lucide="shuffle" class="w-3.5 h-3.5 text-indigo-400"></i>
+          <span class="hidden sm:inline">Random Contact</span>
+        </button>
+        <button onclick="clearSessionHistory()" class="text-xs px-2.5 py-1.5 rounded-lg bg-zinc-850 hover:bg-zinc-800 border border-white/[0.08] text-zinc-300 hover:text-white transition flex items-center space-x-1.5">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5 text-zinc-400"></i>
+          <span class="hidden sm:inline">Reset Session</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY (SCROLLABLE) -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-6 flex flex-col space-y-6">
+
+      <!-- ================= VIEW 1: VOICE SIMULATOR (DEFAULT) ================= -->
+      <div id="view-simulator" class="flex-1 flex flex-col space-y-6">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+
+          <!-- COLUMN 1: CAMPAIGN & AUDIENCE CONFIG (lg:col-span-4 xl:col-span-3) -->
+          <div class="lg:col-span-4 xl:col-span-3 flex flex-col space-y-4">
+            <div class="panel-bg panel-border rounded-2xl p-4 sm:p-5 flex flex-col space-y-4">
+              <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.08]">
+                <span class="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center space-x-1.5">
+                  <i data-lucide="sliders" class="w-3.5 h-3.5 text-indigo-400"></i>
+                  <span>Dialer Configuration</span>
+                </span>
+                <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">READY</span>
+              </div>
+
+              <!-- Campaign / Domain Selector -->
+              <div>
+                <label class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">Domain Template</label>
+                <select id="campaignSelect" onchange="onCampaignChange()" class="w-full bg-zinc-900 border border-white/[0.1] rounded-xl px-3 py-2 text-xs text-zinc-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition">
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+
+              <!-- Language & Script Selector -->
+              <div>
+                <label class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">Target Dialect / Language</label>
+                <div id="languagePills" class="flex flex-wrap gap-1.5">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+
+              <!-- Recipient Inputs -->
+              <div class="pt-3 border-t border-white/[0.08] space-y-2.5">
+                <label class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Caller Identity (CLI)</label>
+                <div>
+                  <input id="recipientName" type="text" placeholder="Recipient Name" value="Karan Sharma" class="w-full bg-zinc-900 border border-white/[0.1] rounded-xl px-3 py-2 text-xs text-zinc-100 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                </div>
+                <div>
+                  <input id="recipientPhone" type="text" placeholder="Phone Number" value="+91 98765 43210" class="w-full bg-zinc-900 border border-white/[0.1] rounded-xl px-3 py-2 text-xs font-mono text-zinc-100 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                </div>
+              </div>
+
+              <!-- Model Telemetry Specs Box -->
+              <div class="bg-zinc-950/70 rounded-xl p-3 border border-white/[0.06] text-[11px] space-y-1.5">
+                <div class="flex justify-between text-zinc-400">
+                  <span>Inference Engine:</span>
+                  <span class="font-mono text-zinc-200">Groq Qwen 27B</span>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                  <span>Voice Model:</span>
+                  <span class="font-mono text-zinc-200">Deepgram Aura (Asteria)</span>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                  <span>Sampling Rate:</span>
+                  <span class="font-mono text-zinc-200">24,000 Hz PCM</span>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                  <span>VAD Cutoff:</span>
+                  <span class="font-mono text-zinc-200">400 ms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMN 2: CENTER SOFTPHONE DIALER (lg:col-span-8 xl:col-span-6) -->
+          <div class="lg:col-span-8 xl:col-span-6 flex flex-col">
+            <div class="panel-bg panel-border rounded-2xl flex-1 flex flex-col shadow-2xl overflow-hidden relative min-h-[580px]">
+
+              <!-- SOFTPHONE TOP BAR -->
+              <div class="px-5 py-3.5 bg-zinc-900/60 border-b border-white/[0.08] flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-xl bg-zinc-800 border border-white/[0.08] flex items-center justify-center text-indigo-400 font-bold text-sm">
+                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-2">
+                      <span id="callRecipientDisplay" class="font-semibold text-sm text-white">Karan Sharma</span>
+                      <span id="callStateBadge" class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-white/[0.08]">IDLE</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs text-zinc-400">
+                      <span id="campaignNameDisplay">Webinar Confirmation</span>
+                      <span>•</span>
+                      <span id="callTimer" class="font-mono text-emerald-400 font-semibold">00:00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- REAL-TIME CANVAS AUDIO VISUALIZER -->
+                <div class="flex items-center space-x-2 bg-zinc-950/80 px-3 py-1.5 rounded-xl border border-white/[0.06]">
+                  <canvas id="waveformCanvas" width="80" height="24" class="block"></canvas>
+                  <span id="audioStateIndicator" class="text-[10px] font-mono text-zinc-500 uppercase">Muted</span>
+                </div>
+              </div>
+
+              <!-- LIVE TRANSCRIPT CHAT FEED -->
+              <div id="chatFeed" class="flex-1 p-5 overflow-y-auto space-y-4 max-h-[460px] min-h-[380px]">
+                <div id="emptyCallPlaceholder" class="h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
+                  <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-zinc-500">
+                    <i data-lucide="headphones" class="w-6 h-6 text-indigo-400"></i>
+                  </div>
+                  <div class="max-w-xs">
+                    <h4 class="font-semibold text-zinc-200 text-sm">Voice Telephony Simulator</h4>
+                    <p class="text-xs text-zinc-400 mt-1 leading-relaxed">Click <strong>Start Call</strong> below to simulate live customer call interactions with speech synthesis.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTEXTUAL QUICK REPLIES BAR -->
+              <div class="px-5 py-2 bg-zinc-950/50 border-t border-white/[0.06] flex items-center space-x-2 overflow-x-auto">
+                <span class="text-[10px] uppercase font-bold text-zinc-500 whitespace-nowrap">Suggested:</span>
+                <div id="quickReplies" class="flex items-center space-x-1.5">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+
+              <!-- DIAL / HANGUP & INPUT BAR -->
+              <div class="p-4 bg-zinc-900/90 border-t border-white/[0.08] flex flex-col sm:flex-row items-center gap-3">
+                <!-- Start / End Call Button -->
+                <button id="btnCallToggle" onclick="toggleCall()" class="w-full sm:w-auto flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-semibold text-xs tracking-wide transition shadow-lg shadow-emerald-600/20">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                  <span id="btnCallText">Start Call</span>
+                </button>
+
+                <!-- Caller Speech Input Form -->
+                <form id="chatForm" onsubmit="handleUserSubmit(event)" class="flex-1 flex items-center space-x-2 w-full">
+                  <input id="userInput" type="text" placeholder="Type caller speech (or click suggestions above)..." disabled class="flex-1 bg-zinc-950 border border-white/[0.1] rounded-xl px-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                  <button id="btnSend" type="submit" disabled class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white text-xs font-semibold transition flex items-center justify-center active:scale-95">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMN 3: TELEMETRY & JSON INSPECTOR (lg:col-span-12 xl:col-span-3) -->
+          <div class="lg:col-span-12 xl:col-span-3 flex flex-col space-y-4">
+
+            <!-- Telemetry & Latency Metrics -->
+            <div class="panel-bg panel-border rounded-2xl p-4 flex flex-col space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center space-x-1.5">
+                <i data-lucide="gauge" class="w-3.5 h-3.5 text-cyan-400"></i>
+                <span>Live Telemetry</span>
+              </span>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-zinc-900 border border-white/[0.06] rounded-xl p-2.5 text-center">
+                  <span class="text-[10px] text-zinc-400 uppercase">LLM Latency</span>
+                  <p id="metricLLM" class="font-mono text-sm font-semibold text-emerald-400 mt-0.5">0 ms</p>
+                </div>
+                <div class="bg-zinc-900 border border-white/[0.06] rounded-xl p-2.5 text-center">
+                  <span class="text-[10px] text-zinc-400 uppercase">TTS Latency</span>
+                  <p id="metricTTS" class="font-mono text-cyan-400 text-sm font-semibold mt-0.5">0 ms</p>
+                </div>
+              </div>
+
+              <!-- Outcome Tag Badge -->
+              <div class="bg-zinc-950/80 rounded-xl p-3 border border-white/[0.06] flex items-center justify-between">
+                <span class="text-xs text-zinc-400">Extracted Status:</span>
+                <span id="metricOutcome" class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">NONE</span>
+              </div>
+            </div>
+
+            <!-- JSON System Prompt Inspector -->
+            <div class="panel-bg panel-border rounded-2xl p-4 flex-1 flex flex-col space-y-2">
+              <div class="flex items-center justify-between pb-2 border-b border-white/[0.08]">
+                <span class="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center space-x-1.5">
+                  <i data-lucide="code-2" class="w-3.5 h-3.5 text-amber-400"></i>
+                  <span>System Prompt Inspector</span>
+                </span>
+                <span class="text-[10px] font-mono text-zinc-500">Live Context</span>
+              </div>
+              <div class="flex-1 bg-zinc-950/90 rounded-xl p-3 border border-white/[0.06] font-mono text-[11px] text-zinc-300 overflow-y-auto max-h-[300px] leading-relaxed select-all" id="promptInspector">
+                // System prompt will appear here when call connects...
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= VIEW 2: CAMPAIGNS STUDIO ================= -->
+      <div id="view-campaigns" class="hidden flex-col space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-white">Campaigns & Domains Library</h2>
+            <p class="text-xs text-zinc-400">Configure dialogue trees, prompt rules, and multilingual greetings per domain.</p>
+          </div>
+        </div>
+
+        <div id="campaignCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Dynamically populated from /api/campaigns -->
+        </div>
+      </div>
+
+      <!-- ================= VIEW 3: AUDIENCE & CRM ================= -->
+      <div id="view-contacts" class="hidden flex-col space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-white">Audience & Contact Registry</h2>
+            <p class="text-xs text-zinc-400">Manage campaign leads, phone numbers, and trigger immediate AI calls.</p>
+          </div>
+        </div>
+
+        <div class="panel-bg panel-border rounded-2xl overflow-hidden shadow-xl">
+          <table class="w-full text-left text-xs text-zinc-300">
+            <thead class="bg-zinc-900 border-b border-white/[0.08] text-zinc-400 uppercase font-semibold">
+              <tr>
+                <th class="p-3.5">Recipient Name</th>
+                <th class="p-3.5">Phone Number</th>
+                <th class="p-3.5">Target Campaign</th>
+                <th class="p-3.5">Language</th>
+                <th class="p-3.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contactsTableBody" class="divide-y divide-white/[0.06]">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= VIEW 4: ANALYTICS & LOGS ================= -->
+      <div id="view-analytics" class="hidden flex-col space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-white">Call Logs & Telemetry Analytics</h2>
+            <p class="text-xs text-zinc-400">Review complete audio transcripts, extracted outcome tags, and latency metrics.</p>
+          </div>
+          <button onclick="fetchAnalyticsAndLogs()" class="text-xs px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition flex items-center space-x-1.5">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <span>Refresh</span>
+          </button>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="panel-bg panel-border rounded-xl p-4">
+            <span class="text-xs text-zinc-400 font-medium">Total Simulated Calls</span>
+            <p id="kpiTotalCalls" class="text-2xl font-bold text-white mt-1">0</p>
+          </div>
+          <div class="panel-bg panel-border rounded-xl p-4">
+            <span class="text-xs text-zinc-400 font-medium">Conversion / Confirmed</span>
+            <p id="kpiConfirmed" class="text-2xl font-bold text-emerald-400 mt-1">0%</p>
+          </div>
+          <div class="panel-bg panel-border rounded-xl p-4">
+            <span class="text-xs text-zinc-400 font-medium">Opt-Out / Declined</span>
+            <p id="kpiOptOut" class="text-2xl font-bold text-rose-400 mt-1">0</p>
+          </div>
+          <div class="panel-bg panel-border rounded-xl p-4">
+            <span class="text-xs text-zinc-400 font-medium">Avg Cost / 1-Min Call</span>
+            <p class="text-2xl font-bold text-indigo-400 mt-1">₹0.74</p>
+          </div>
+        </div>
+
+        <!-- Call Logs Table -->
+        <div class="panel-bg panel-border rounded-2xl overflow-hidden shadow-xl">
+          <table class="w-full text-left text-xs text-zinc-300">
+            <thead class="bg-zinc-900 border-b border-white/[0.08] text-zinc-400 uppercase font-semibold">
+              <tr>
+                <th class="p-3.5">Timestamp</th>
+                <th class="p-3.5">Recipient</th>
+                <th class="p-3.5">Campaign</th>
+                <th class="p-3.5">Language</th>
+                <th class="p-3.5">Outcome Status</th>
+                <th class="p-3.5">Turns</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody" class="divide-y divide-white/[0.06]">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- HIDDEN AUDIO TAG -->
+  <audio id="globalAudioPlayer" preload="auto" class="hidden"></audio>
+
+  <!-- ================= CORE FRONTEND LOGIC ================= -->
+  <script>
+    let campaignsData = {};
+    let sampleContacts = [];
+    let selectedCampaignId = "";
+    let selectedLanguage = "en";
+    let isCallActive = false;
+    let callTimerInterval = null;
+    let callSeconds = 0;
+    let conversationHistory = [];
+    let activeSession = null;
+    let isAudioPlaying = false;
+
+    // Elements
+    const campaignSelect = document.getElementById("campaignSelect");
+    const languagePills = document.getElementById("languagePills");
+    const recipientNameInput = document.getElementById("recipientName");
+    const recipientPhoneInput = document.getElementById("recipientPhone");
+    const callRecipientDisplay = document.getElementById("callRecipientDisplay");
+    const campaignNameDisplay = document.getElementById("campaignNameDisplay");
+    const callStateBadge = document.getElementById("callStateBadge");
+    const callTimer = document.getElementById("callTimer");
+    const btnCallToggle = document.getElementById("btnCallToggle");
+    const btnCallText = document.getElementById("btnCallText");
+    const userInput = document.getElementById("userInput");
+    const btnSend = document.getElementById("btnSend");
+    const chatFeed = document.getElementById("chatFeed");
+    const emptyCallPlaceholder = document.getElementById("emptyCallPlaceholder");
+    const quickReplies = document.getElementById("quickReplies");
+    const promptInspector = document.getElementById("promptInspector");
+    const globalAudioPlayer = document.getElementById("globalAudioPlayer");
+    const audioStateIndicator = document.getElementById("audioStateIndicator");
+
+    // Init
+    window.addEventListener("DOMContentLoaded", async () => {
+      lucide.createIcons();
+      initCanvasWaveform();
+      await fetchCampaigns();
+      await fetchContacts();
+      await fetchAnalyticsAndLogs();
+    });
+
+    // VIEW SWITCHER
+    function switchView(viewName) {
+      const views = ['simulator', 'campaigns', 'contacts', 'analytics'];
+      views.forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+        document.getElementById(`view-${v}`).classList.remove('flex');
+        
+        const navBtn = document.getElementById(`nav-${v}`);
+        if (navBtn) {
+          navBtn.className = "w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-zinc-850/60 transition";
+        }
+      });
+
+      const activeView = document.getElementById(`view-${viewName}`);
+      activeView.classList.remove('hidden');
+      activeView.classList.add('flex');
+
+      const activeNav = document.getElementById(`nav-${viewName}`);
+      if (activeNav) {
+        activeNav.className = "w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-white bg-zinc-800/90 border border-white/[0.08] transition";
+      }
+
+      const titles = {
+        simulator: "Live Voice Simulator",
+        campaigns: "Campaigns Studio",
+        contacts: "Audience & CRM",
+        analytics: "Logs & Analytics"
+      };
+      document.getElementById("breadcrumbViewTitle").textContent = titles[viewName] || "Studio";
+      lucide.createIcons();
+    }
+
+    // CANVAS WAVEFORM ENGINE
+    function initCanvasWaveform() {
+      const canvas = document.getElementById("waveformCanvas");
+      const ctx = canvas.getContext("2d");
+      let phase = 0;
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const bars = 8;
+        const barWidth = 4;
+        const spacing = 5;
+        const startX = (canvas.width - (bars * (barWidth + spacing))) / 2;
+
+        for (let i = 0; i < bars; i++) {
+          const x = startX + i * (barWidth + spacing);
+          let height = 4;
+
+          if (isAudioPlaying) {
+            height = 6 + Math.abs(Math.sin(phase + i * 0.8)) * 14;
+          }
+
+          const y = (canvas.height - height) / 2;
+          ctx.fillStyle = isAudioPlaying ? "#6366f1" : "#3f3f46";
+          ctx.beginPath();
+          ctx.roundRect(x, y, barWidth, height, 2);
+          ctx.fill();
+        }
+
+        phase += 0.12;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // CAMPAIGNS API
+    async function fetchCampaigns() {
+      try {
+        const res = await fetch("/api/campaigns");
+        const data = await res.json();
+        campaignsData = data.campaigns;
+
+        campaignSelect.innerHTML = "";
+        for (const [id, c] of Object.entries(campaignsData)) {
+          const opt = document.createElement("option");
+          opt.value = id;
+          opt.textContent = `${c.title} (${c.domain})`;
+          campaignSelect.appendChild(opt);
+        }
+
+        selectedCampaignId = Object.keys(campaignsData)[0];
+        renderCampaignDetails();
+        renderCampaignCards();
+      } catch (err) {
+        console.error("Failed to fetch campaigns", err);
+      }
+    }
+
+    async function fetchContacts() {
+      try {
+        const res = await fetch("/api/contacts");
+        const data = await res.json();
+        sampleContacts = data.contacts || [];
+        renderContactsTable();
+      } catch (err) {
+        console.error("Failed to load contacts", err);
+      }
+    }
+
+    function onCampaignChange() {
+      selectedCampaignId = campaignSelect.value;
+      renderCampaignDetails();
+    }
+
+    function renderCampaignDetails() {
+      const camp = campaignsData[selectedCampaignId];
+      if (!camp) return;
+
+      campaignNameDisplay.textContent = camp.title;
+      callRecipientDisplay.textContent = recipientNameInput.value || "Customer";
+
+      // Render Language Pills
+      languagePills.innerHTML = "";
+      const availLangs = Object.keys(camp.prompts);
+      selectedLanguage = availLangs[0];
+
+      availLangs.forEach(lang => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `px-2.5 py-1 rounded-lg text-xs font-semibold border transition ${
+          lang === selectedLanguage
+            ? "bg-indigo-600 border-indigo-500 text-white shadow-sm"
+            : "bg-zinc-900 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+        }`;
+        btn.textContent = lang.toUpperCase();
+        btn.onclick = () => {
+          selectedLanguage = lang;
+          renderCampaignDetails();
+        };
+        languagePills.appendChild(btn);
+      });
+
+      // Update Prompt Inspector
+      const activePrompt = camp.prompts[selectedLanguage] || "";
+      promptInspector.textContent = activePrompt;
+
+      renderQuickReplies();
+    }
+
+    function renderQuickReplies() {
+      quickReplies.innerHTML = "";
+      let replies = ["Yes, I will attend", "No, I am busy", "What time is it?", "Please email me"];
+
+      if (selectedCampaignId === "advertising_promo") {
+        replies = ["Send link on WhatsApp", "I am on DND, stop calling", "What is the discount?"];
+      } else if (selectedCampaignId === "govt_scheme") {
+        replies = ["Haan mujhe jankari chahiye", "Main eligible hoon?", "CSC kendra kahan hai?"];
+      } else if (selectedCampaignId === "school_announcement") {
+        replies = ["Hu jarur aavis", "Fee ketli baki che?", "Online meeting thay sake?"];
+      }
+
+      replies.forEach(text => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "text-[11px] px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-white/[0.08] text-zinc-300 transition whitespace-nowrap active:scale-95";
+        chip.textContent = text;
+        chip.onclick = () => {
+          if (!isCallActive) return;
+          userInput.value = text;
+          handleUserSubmit(new Event("submit"));
+        };
+        quickReplies.appendChild(chip);
+      });
+    }
+
+    function loadRandomContact() {
+      if (!sampleContacts.length) return;
+      const contact = sampleContacts[Math.floor(Math.random() * sampleContacts.length)];
+      recipientNameInput.value = contact.name;
+      recipientPhoneInput.value = contact.phone_number;
+
+      if (campaignsData[contact.campaign_type]) {
+        selectedCampaignId = contact.campaign_type;
+        campaignSelect.value = selectedCampaignId;
+        selectedLanguage = contact.preferred_language || "en";
+        renderCampaignDetails();
+      }
+    }
+
+    function clearSessionHistory() {
+      chatFeed.innerHTML = "";
+      conversationHistory = [];
+      document.getElementById("metricLLM").textContent = "0 ms";
+      document.getElementById("metricTTS").textContent = "0 ms";
+      document.getElementById("metricOutcome").textContent = "NONE";
+      if (!isCallActive) {
+        chatFeed.appendChild(emptyCallPlaceholder);
+      }
+    }
+
+    // CALL LIFECYCLE
+    async function toggleCall() {
+      if (isCallActive) {
+        await endCall("CALL_TERMINATED_BY_USER");
+      } else {
+        await startCall();
+      }
+    }
+
+    async function startCall() {
+      try {
+        setCallState("connecting");
+        chatFeed.innerHTML = "";
+
+        const payload = {
+          campaign_id: selectedCampaignId,
+          language: selectedLanguage,
+          recipient_name: recipientNameInput.value.trim() || "User",
+          phone_number: recipientPhoneInput.value.trim() || "+91 98765 43210"
+        };
+
+        const res = await fetch("/api/call/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!data.success) throw new Error(data.detail || "Call failed");
+
+        activeSession = data.session;
+        conversationHistory = [{ role: "assistant", content: data.initial_greeting }];
+
+        promptInspector.textContent = activeSession.system_prompt;
+        setCallState("active");
+        appendMessage("assistant", data.initial_greeting);
+
+        if (data.audio_url) {
+          playAgentAudio(data.audio_url);
+        }
+
+        document.getElementById("metricTTS").textContent = `${data.tts_latency_ms.toFixed(0)} ms`;
+      } catch (err) {
+        alert("Call error: " + err.message);
+        setCallState("idle");
+      }
+    }
+
+    async function handleUserSubmit(e) {
+      e.preventDefault();
+      const text = userInput.value.trim();
+      if (!text || !isCallActive) return;
+
+      userInput.value = "";
+      appendMessage("user", text);
+
+      if (["bye", "exit", "hangup", "alvida", "aavjo"].includes(text.toLowerCase())) {
+        await endCall("CALL_TERMINATED_BY_USER");
+        return;
+      }
+
+      setCallState("speaking");
+
+      try {
+        const payload = {
+          campaign_id: activeSession.campaign_id,
+          system_prompt: activeSession.system_prompt,
+          messages: conversationHistory,
+          user_message: text
+        };
+
+        const res = await fetch("/api/call/turn", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!data.success) throw new Error(data.detail || "Turn failed");
+
+        conversationHistory.push({ role: "user", content: text });
+        conversationHistory.push({ role: "assistant", content: data.ai_reply });
+
+        appendMessage("assistant", data.ai_reply);
+
+        if (data.audio_url) {
+          playAgentAudio(data.audio_url);
+        }
+
+        document.getElementById("metricLLM").textContent = `${data.llm_latency_ms.toFixed(0)} ms`;
+        document.getElementById("metricTTS").textContent = `${data.tts_latency_ms.toFixed(0)} ms`;
+        if (data.status_tag) {
+          document.getElementById("metricOutcome").textContent = data.status_tag;
+          document.getElementById("metricOutcome").className = "font-mono text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        }
+
+        if (data.status_tag) {
+          setTimeout(async () => {
+            await endCall(data.status_tag);
+          }, 3500);
+        } else {
+          setCallState("active");
+        }
+      } catch (err) {
+        appendMessage("system", "Error: " + err.message);
+        setCallState("active");
+      }
+    }
+
+    async function endCall(statusTag) {
+      setCallState("idle");
+      isAudioPlaying = false;
+      audioStateIndicator.textContent = "Muted";
+
+      if (activeSession) {
+        try {
+          await fetch("/api/call/end", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              campaign_id: activeSession.campaign_id,
+              campaign_title: activeSession.campaign_title,
+              language: activeSession.language,
+              recipient: recipientNameInput.value,
+              final_status: statusTag,
+              transcript: conversationHistory
+            })
+          });
+          await fetchAnalyticsAndLogs();
+        } catch (err) {
+          console.error("End call error", err);
+        }
+      }
+    }
+
+    function setCallState(state) {
+      if (state === "connecting") {
+        callStateBadge.textContent = "CONNECTING...";
+        callStateBadge.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 animate-pulse";
+        btnCallText.textContent = "Connecting...";
+        btnCallToggle.className = "w-full sm:w-auto flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-zinc-800 text-zinc-400 font-semibold text-xs cursor-not-allowed";
+      } else if (state === "active" || state === "speaking") {
+        isCallActive = true;
+        callStateBadge.textContent = state === "speaking" ? "AGENT SPEAKING" : "LIVE CALL";
+        callStateBadge.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        btnCallText.textContent = "Hang Up";
+        btnCallToggle.className = "w-full sm:w-auto flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 active:scale-95 text-white font-semibold text-xs transition shadow-lg shadow-rose-600/20";
+        userInput.disabled = false;
+        btnSend.disabled = false;
+        userInput.focus();
+
+        if (!callTimerInterval) startTimer();
+      } else if (state === "idle") {
+        isCallActive = false;
+        callStateBadge.textContent = "IDLE";
+        callStateBadge.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-white/[0.08]";
+        btnCallText.textContent = "Start Call";
+        btnCallToggle.className = "w-full sm:w-auto flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-semibold text-xs transition shadow-lg shadow-emerald-600/20";
+        userInput.disabled = true;
+        btnSend.disabled = true;
+        stopTimer();
+      }
+    }
+
+    function startTimer() {
+      callSeconds = 0;
+      callTimer.textContent = "00:00";
+      callTimerInterval = setInterval(() => {
+        callSeconds++;
+        const mins = String(Math.floor(callSeconds / 60)).padStart(2, '0');
+        const secs = String(callSeconds % 60).padStart(2, '0');
+        callTimer.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (callTimerInterval) {
+        clearInterval(callTimerInterval);
+        callTimerInterval = null;
+      }
+    }
+
+    function playAgentAudio(url) {
+      globalAudioPlayer.src = url;
+      isAudioPlaying = true;
+      audioStateIndicator.textContent = "Streaming";
+      audioStateIndicator.className = "text-[10px] font-mono text-emerald-400 uppercase animate-pulse";
+
+      globalAudioPlayer.play().catch(e => console.log("Autoplay policy handled", e));
+      globalAudioPlayer.onended = () => {
+        isAudioPlaying = false;
+        audioStateIndicator.textContent = "Muted";
+        audioStateIndicator.className = "text-[10px] font-mono text-zinc-500 uppercase";
+        setCallState("active");
+      };
+    }
+
+    function appendMessage(role, text) {
+      if (emptyCallPlaceholder) emptyCallPlaceholder.remove();
+
+      const bubble = document.createElement("div");
+      bubble.className = `flex items-start space-x-2.5 ${role === "user" ? "justify-end" : "justify-start"}`;
+
+      if (role === "assistant") {
+        bubble.innerHTML = `
+          <div class="w-7 h-7 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0">
+            AI
+          </div>
+          <div class="max-w-[85%] bg-zinc-900 border border-white/[0.08] rounded-2xl rounded-tl-sm px-4 py-2.5 text-xs text-zinc-200 leading-relaxed shadow-sm">
+            ${text}
+          </div>
+        `;
+      } else if (role === "user") {
+        bubble.innerHTML = `
+          <div class="max-w-[85%] bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-xs leading-relaxed shadow-md shadow-indigo-600/10">
+            ${text}
+          </div>
+          <div class="w-7 h-7 rounded-lg bg-zinc-800 border border-white/[0.08] flex items-center justify-center text-[10px] text-zinc-400 font-bold shrink-0">
+            You
+          </div>
+        `;
+      }
+
+      chatFeed.appendChild(bubble);
+      chatFeed.scrollTop = chatFeed.scrollHeight;
+    }
+
+    // ANALYTICS & LOGS TABLE
+    async function fetchAnalyticsAndLogs() {
+      try {
+        const [statsRes, logsRes] = await Promise.all([
+          fetch("/api/stats"),
+          fetch("/api/logs")
+        ]);
+
+        const stats = await statsRes.json();
+        const logsData = await logsRes.json();
+        const logs = logsData.logs || [];
+
+        // Update KPIs
+        document.getElementById("kpiTotalCalls").textContent = stats.total_calls || 0;
+        document.getElementById("kpiConfirmed").textContent = stats.conversion_rate || "0.0%";
+        document.getElementById("kpiOptOut").textContent = stats.opt_out_calls || 0;
+
+        // Render Logs Table
+        const tbody = document.getElementById("logsTableBody");
+        tbody.innerHTML = "";
+
+        if (!logs.length) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-zinc-500 text-xs">No call logs recorded yet.</td></tr>`;
+          return;
+        }
+
+        logs.slice().reverse().forEach(l => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-zinc-900/60 transition";
+
+          let statusClass = "bg-zinc-800 text-zinc-400";
+          if (["CONFIRM", "BOOKED", "ACCEPTED", "INTERESTED"].some(k => l.final_status.includes(k))) {
+            statusClass = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+          } else if (["OPT_OUT", "DECLINE", "ABSENT"].some(k => l.final_status.includes(k))) {
+            statusClass = "bg-rose-500/10 text-rose-400 border border-rose-500/20";
+          }
+
+          row.innerHTML = `
+            <td class="p-3.5 font-mono text-zinc-400 text-[11px]">${(l.timestamp || "").replace("T", " ").slice(0, 19)}</td>
+            <td class="p-3.5 font-medium text-zinc-100">${l.recipient || "Contact"}</td>
+            <td class="p-3.5 text-zinc-300">${l.campaign_title || l.campaign_id}</td>
+            <td class="p-3.5 font-mono uppercase text-zinc-400">${l.language || "en"}</td>
+            <td class="p-3.5"><span class="font-mono text-[10px] px-2 py-0.5 rounded-full ${statusClass}">${l.final_status}</span></td>
+            <td class="p-3.5 font-mono text-zinc-400">${(l.transcript || []).length} turns</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Failed to load analytics", err);
+      }
+    }
+
+    // CONTACTS TABLE
+    function renderContactsTable() {
+      const tbody = document.getElementById("contactsTableBody");
+      tbody.innerHTML = "";
+
+      sampleContacts.forEach(c => {
+        const row = document.createElement("tr");
+        row.className = "hover:bg-zinc-900/60 transition";
+        row.innerHTML = `
+          <td class="p-3.5 font-semibold text-zinc-100">${c.name}</td>
+          <td class="p-3.5 font-mono text-zinc-400">${c.phone_number}</td>
+          <td class="p-3.5 text-zinc-300">${c.campaign_type}</td>
+          <td class="p-3.5 font-mono uppercase text-zinc-400">${c.preferred_language}</td>
+          <td class="p-3.5 text-right">
+            <button onclick="dialContact('${c.name}', '${c.phone_number}', '${c.campaign_type}', '${c.preferred_language}')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 border border-indigo-500/30 text-indigo-300 hover:text-white transition">
+              Call Now
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function dialContact(name, phone, campaign, lang) {
+      recipientNameInput.value = name;
+      recipientPhoneInput.value = phone;
+      if (campaignsData[campaign]) {
+        selectedCampaignId = campaign;
+        campaignSelect.value = campaign;
+        selectedLanguage = lang;
+        renderCampaignDetails();
+      }
+      switchView('simulator');
+      startCall();
+    }
+
+    // CAMPAIGN CARDS
+    function renderCampaignCards() {
+      const grid = document.getElementById("campaignCardsGrid");
+      grid.innerHTML = "";
+
+      for (const [id, c] of Object.entries(campaignsData)) {
+        const card = document.createElement("div");
+        card.className = "panel-bg panel-border rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-zinc-700 transition";
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-white/[0.08]">${c.domain}</span>
+              <span class="text-xs text-indigo-400 font-semibold">${Object.keys(c.prompts).length} Languages</span>
+            </div>
+            <h3 class="font-bold text-sm text-zinc-100">${c.title}</h3>
+            <p class="text-xs text-zinc-400 line-clamp-2">${c.prompts[Object.keys(c.prompts)[0]].split("RULES:")[0]}</p>
+          </div>
+          <button onclick="selectCampaignAndSimulate('${id}')" class="w-full py-2 rounded-xl bg-zinc-900 hover:bg-indigo-600 border border-white/[0.08] text-xs font-semibold text-zinc-300 hover:text-white transition">
+            Launch in Simulator
+          </button>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    function selectCampaignAndSimulate(id) {
+      selectedCampaignId = id;
+      campaignSelect.value = id;
+      renderCampaignDetails();
+      switchView('simulator');
+    }
+  </script>
+</body>
+</html>

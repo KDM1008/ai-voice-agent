@@ -1,0 +1,490 @@
+[
+  {
+    "timestamp": "2026-11-03T18:41:05.699160",
+    "campaign_id": "webinar_followup",
+    "recipient": "Aditya Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Aditya Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend the live session tomorrow."
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for confirming your attendance. We look forward to seeing you tomorrow at 6:00 PM."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T19:01:15.684592",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "hinglish",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma ji! Main Antigravity University se Priya bol rahi hoon. Aapne hamare AI & Machine Learning Career Bootcamp ke liye register kiya tha—kya aap kal live session attend kar payenge?"
+      },
+      {
+        "role": "user",
+        "content": "yes"
+      },
+      {
+        "role": "assistant",
+        "content": "Bahut accha, toh main aapki seat confirm kar deti hoon. Kal 6:00 PM par milte hain!"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T19:17:41.395887",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "yes"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear. We look forward to seeing you there at 6:00 PM."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:28:30.293075",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear. Please join us tomorrow at 6:00 PM."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:28:57.643612",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "RECORDING_REQUESTED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear. Please join us tomorrow at 6:00 PM."
+      },
+      {
+        "role": "user",
+        "content": "No, I am busy"
+      },
+      {
+        "role": "assistant",
+        "content": "I understand your schedule is tight. Would you like me to send you the recording instead?"
+      },
+      {
+        "role": "user",
+        "content": "okay"
+      },
+      {
+        "role": "assistant",
+        "content": "I will send the recording to your email shortly. Thank you for your time, Karan."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:29:04.049022",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CALL_ENDED_BY_USER",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear. Please join us tomorrow at 6:00 PM."
+      },
+      {
+        "role": "user",
+        "content": "No, I am busy"
+      },
+      {
+        "role": "assistant",
+        "content": "I understand your schedule is tight. Would you like me to send you the recording instead?"
+      },
+      {
+        "role": "user",
+        "content": "okay"
+      },
+      {
+        "role": "assistant",
+        "content": "I will send the recording to your email shortly. Thank you for your time, Karan."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:29:37.716378",
+    "campaign_id": "business_lead",
+    "campaign_title": "Business Lead Qualification & Follow-up",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "DEMO_BOOKED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma, this is Rohan from Apex Cloud Solutions. I noticed your interest in our Enterprise Voice AI Platform. Would you like a quick walkthrough this week to see how it can help your business?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, let’s lock in a 15-minute slot for tomorrow at 10 AM. I’ll send the calendar invite and demo link shortly."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:30:10.781861",
+    "campaign_id": "business_lead",
+    "campaign_title": "Business Lead Qualification & Follow-up",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "DEMO_BOOKED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma, this is Rohan from Apex Cloud Solutions. I noticed your interest in our Enterprise Voice AI Platform. Would you like a quick walkthrough this week to see how it can help your business?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, let’s lock in a 15-minute slot for tomorrow at 10 AM. I’ll send the calendar invite and demo link shortly."
+      },
+      {
+        "role": "user",
+        "content": "What time is it?"
+      },
+      {
+        "role": "assistant",
+        "content": "It is currently 10:15 AM IST. Shall I proceed with the 10 AM slot for tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "What time is it?"
+      },
+      {
+        "role": "assistant",
+        "content": "It is currently 10:15 AM IST. Shall I proceed with the 10 AM slot for tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Please email me"
+      },
+      {
+        "role": "assistant",
+        "content": "I will send the calendar invite and demo link to your email shortly. Please keep an eye out for it."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:30:17.778935",
+    "campaign_id": "business_lead",
+    "campaign_title": "Business Lead Qualification & Follow-up",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CALL_ENDED_BY_USER",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma, this is Rohan from Apex Cloud Solutions. I noticed your interest in our Enterprise Voice AI Platform. Would you like a quick walkthrough this week to see how it can help your business?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, let’s lock in a 15-minute slot for tomorrow at 10 AM. I’ll send the calendar invite and demo link shortly."
+      },
+      {
+        "role": "user",
+        "content": "What time is it?"
+      },
+      {
+        "role": "assistant",
+        "content": "It is currently 10:15 AM IST. Shall I proceed with the 10 AM slot for tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "What time is it?"
+      },
+      {
+        "role": "assistant",
+        "content": "It is currently 10:15 AM IST. Shall I proceed with the 10 AM slot for tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Please email me"
+      },
+      {
+        "role": "assistant",
+        "content": "I will send the calendar invite and demo link to your email shortly. Please keep an eye out for it."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:51:33.216256",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear, Karan. We look forward to seeing you there tomorrow at 6:00 PM."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:51:55.470286",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear, Karan. We look forward to seeing you there tomorrow at 6:00 PM."
+      },
+      {
+        "role": "user",
+        "content": "thanks"
+      },
+      {
+        "role": "assistant",
+        "content": "You are most welcome, Karan. Have a great day!"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:52:09.528056",
+    "campaign_id": "webinar_followup",
+    "campaign_title": "Webinar Registration Confirmation",
+    "language": "en",
+    "recipient": "Karan Sharma",
+    "final_status": "CONFIRMED",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Hello Karan Sharma! This is Priya from Antigravity University. I am calling regarding your registration for the AI & Machine Learning Career Bootcamp. Will you be able to attend the live session tomorrow?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I will attend"
+      },
+      {
+        "role": "assistant",
+        "content": "That is wonderful to hear, Karan. We look forward to seeing you there tomorrow at 6:00 PM."
+      },
+      {
+        "role": "user",
+        "content": "thanks"
+      },
+      {
+        "role": "assistant",
+        "content": "You are most welcome, Karan. Have a great day!"
+      },
+      {
+        "role": "user",
+        "content": "thank"
+      },
+      {
+        "role": "assistant",
+        "content": "You are most welcome. Have a great day ahead."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:54:42.417426",
+    "campaign_id": "govt_scheme",
+    "campaign_title": "Government Welfare Scheme Awareness",
+    "language": "hi",
+    "recipient": "Ramesh Patel",
+    "final_status": "INTERESTED_CSC_INFO",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Namaste Ramesh Patel ji. Main National Solar Mission Helpdesk se Vikas bol raha hoon. Sarkar ki PM Surya Ghar Free Electricity Yojana ke tahat up to 78,000 rupees subsidy for solar installation mil rahi hai. Kya aap iski jankari lena chahte hain?"
+      },
+      {
+        "role": "user",
+        "content": "CSC kendra kahan hai?"
+      },
+      {
+        "role": "assistant",
+        "content": "Aapke nazdeeki CSC Kendra ki jankari lene ke liye aap apne mohalle ke sarpanch ya panchayat se sampark kar sakte hain."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:56:13.591476",
+    "campaign_id": "govt_scheme",
+    "campaign_title": "Government Welfare Scheme Awareness",
+    "language": "hi",
+    "recipient": "Ramesh Patel",
+    "final_status": "INTERESTED_CSC_INFO",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Namaste Ramesh Patel ji. Main National Solar Mission Helpdesk se Vikas bol raha hoon. Sarkar ki PM Surya Ghar Free Electricity Yojana ke tahat up to 78,000 rupees subsidy for solar installation mil rahi hai. Kya aap iski jankari lena chahte hain?"
+      },
+      {
+        "role": "user",
+        "content": "CSC kendra kahan hai?"
+      },
+      {
+        "role": "assistant",
+        "content": "Aapke nazdeeki CSC Kendra ki jankari lene ke liye aap apne mohalle ke sarpanch ya panchayat se sampark kar sakte hain."
+      },
+      {
+        "role": "user",
+        "content": "Main eligible hoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "Haan, aap eligible hain."
+      },
+      {
+        "role": "user",
+        "content": "Haan mujhe jankari chahiye"
+      },
+      {
+        "role": "assistant",
+        "content": "Bahut accha, aapke liye CSC Kendra se sampark karne ke liye aap apne nazdeeki panchayat ya sarpanch se madad le sakte hain."
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-11-03T22:56:49.819431",
+    "campaign_id": "govt_scheme",
+    "campaign_title": "Government Welfare Scheme Awareness",
+    "language": "hi",
+    "recipient": "Ramesh Patel",
+    "final_status": "CALL_TERMINATED_BY_USER",
+    "transcript": [
+      {
+        "role": "assistant",
+        "content": "Namaste Ramesh Patel ji. Main National Solar Mission Helpdesk se Vikas bol raha hoon. Sarkar ki PM Surya Ghar Free Electricity Yojana ke tahat up to 78,000 rupees subsidy for solar installation mil rahi hai. Kya aap iski jankari lena chahte hain?"
+      },
+      {
+        "role": "user",
+        "content": "CSC kendra kahan hai?"
+      },
+      {
+        "role": "assistant",
+        "content": "Aapke nazdeeki CSC Kendra ki jankari lene ke liye aap apne mohalle ke sarpanch ya panchayat se sampark kar sakte hain."
+      },
+      {
+        "role": "user",
+        "content": "Main eligible hoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "Haan, aap eligible hain."
+      },
+      {
+        "role": "user",
+        "content": "Haan mujhe jankari chahiye"
+      },
+      {
+        "role": "assistant",
+        "content": "Bahut accha, aapke liye CSC Kendra se sampark karne ke liye aap apne nazdeeki panchayat ya sarpanch se madad le sakte hain."
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      },
+      {
+        "role": "assistant",
+        "content": ""
+      },
+      {
+        "role": "user",
+        "content": "thanks"
+      },
+      {
+        "role": "assistant",
+        "content": "Aapka dhanyavaad."
+      }
+    ]
+  }
+]
