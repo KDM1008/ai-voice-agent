@@ -1,0 +1,26 @@
+.env
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.wav
+*.mp3
+logs/
+
+n==================== Testing 1: Groq API (LLM Brain) ====================
+[SUCCESS] Groq Connection Successful!
+[LATENCY] Response Time: 839.6 ms (Ultra Fast!)
+[REPLY] Agent: "Hello, thank you for reaching out; let me just verify your details to confirm your attendance for tomorrow's webinar."
+
+==================== Testing 2: Deepgram API (STT & TTS) ====================
+[SUCCESS] Deepgram Connection Successful!
+[LATENCY] TTS Generation: 2038.6 ms
+[AUDIO] Audio Generated: 23,196 bytes (Voice synthesis functional!)
+
+==================== Testing 3: Hugging Face Token ====================
+[SUCCESS] Hugging Face Token Valid!
+[USER] Authenticated as: KDM10008
+
+==================================================
+[RESULT] ALL SYSTEMS READY! All 3 credentials authenticated and working!
+==================================================

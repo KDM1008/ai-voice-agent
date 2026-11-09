@@ -1,0 +1,18 @@
+# Voice AI Agent Dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.31.0
+websockets==13.1
+python-dotenv==1.0.1
+pydantic==2.9.2
+requests==2.32.3
+
+# AI & Speech Engines
+groq==0.11.0
+deepgram-sdk==3.7.0
+huggingface-hub==0.25.2
+
+# Audio Processing & Local Testing (Mic/Speaker)
+sounddevice==0.5.1
+numpy==2.1.2
+scipy==1.14.1
+
